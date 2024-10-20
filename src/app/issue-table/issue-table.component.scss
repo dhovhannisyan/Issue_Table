@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+  .selected-count {
+    padding-left: 10px;
+    display: inline-block;
+    width: 100px;
+  }
+
+  .selected-row {
+    background-color: #f0f0f0;
+  }
+
+  .status-indicator {
+    margin-left: 15px;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    &--open {
+      background-color: red;
+    }
+    &--resolved {
+      background-color: green;
+    }
+  }
+}

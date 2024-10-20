@@ -1,0 +1,44 @@
+<table mat-table [dataSource]="issues" class="mat-elevation-z8">
+
+  <!-- Selected Column -->
+  <ng-container matColumnDef="selected">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox [checked]="isAllSelected"
+                    (change)="selectOrUnselectAll($event.checked)">
+      </mat-checkbox>
+      <div class="selected-count">
+        {{ selectedCount ? ('Selected: ' + selectedCount) : 'None' }}
+      </div>
+    </th>
+    <td mat-cell *matCellDef="let issue">
+      <mat-checkbox [disabled]="issue.status === ISSUE_STATUS.RESOLVED"
+                    [(ngModel)]="issue.selected"
+                    (change)="onIssueSelect(issue)">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let issue"> {{ issue.name }} </td>
+  </ng-container>
+
+  <!-- Message Column -->
+  <ng-container matColumnDef="message">
+    <th mat-header-cell *matHeaderCellDef> Message </th>
+    <td mat-cell *matCellDef="let issue"> {{ issue.message }} </td>
+  </ng-container>
+
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let issue">
+      <div class="status-indicator" [class]="'status-indicator--' + issue.status"></div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.selected-row]="row.selected"></tr>
+</table>
+
